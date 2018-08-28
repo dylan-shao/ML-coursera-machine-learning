@@ -1,2 +1,2 @@
 # ML-coursera-machine-learning
-https://www.coursera.org/learn/machine-learning exercises 
+[Coursera Machine Learning](https://www.coursera.org/learn/machine-learning) exercises 
