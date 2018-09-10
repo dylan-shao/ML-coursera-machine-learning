@@ -15,7 +15,7 @@ J = 0;
 
 
 for i = 1:m
-   J = J + (theta' * X'(:,i) - y(i))^2/2/m;
+   J = J + (X(i,:)*theta - y(i))^2/2/m;
 end
 
 
