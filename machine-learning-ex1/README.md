@@ -9,7 +9,7 @@ Supervised learning problems are categorized into `regression` and `classificati
 So we are preicting results in a continuous oupt, the hypothesis funciton for a linear problem could be written like:
 
 ![hypothesis equation](images/hypothesis.png)
-￼￼
+
 Our goal here is to **get the theta** so we could use the hypothesis function to predict new data.
 How we gonna get theta? We use trainning data, for example for **m trainning examples**, **n features**, we have a m*n matrix that every row is a single training input, and there are two ways to solve this m*n hypothesis equation problem to get theta:
 
@@ -31,7 +31,8 @@ We can measure the accuracy of our hpothesis function by using the **cost functi
 ![cost equation](images/costfn.png)
 
 which is a function of theta, and our goal is to get the global minimum of the function -using gradient descent. We take the derivative of each theta and let them equal to 0, we can get the following equation
-![gradient descent function](images/gd.png)and it turns out, that if we choose a sufficiently small **learning rate - alpha**, the cost function could recrease on every iteration, but if alpha is too small, gradient descent can be very slow to converge. So, **how can we speed up the gradient descent?** -- **Feature Scaling**
+![gradient descent function](images/gd.png)
+and it turns out, that if we choose a sufficiently small **learning rate - alpha**, the cost function could recrease on every iteration, but if alpha is too small, gradient descent can be very slow to converge. So, **how can we speed up the gradient descent?** -- **Feature Scaling**
 
 ##### Feature Scaling
 
@@ -39,7 +40,7 @@ the theta will decrease slowly on large ranges, and quickly on small ranges. For
 
 1. feature scaling: dividing the input values by the range or standard deviation of the input variable, resulting new range of just 1
 2. mean normalization: substracting the average value for an input variable from the values for that input variable, resulting in a new average value of 0.
-   ![feature scaling equation](images/dc.png)
+   ![feature scaling equation](images/fc.png)
 
 ### Features and Polynomial Regression
 
@@ -49,7 +50,7 @@ if our prediction does not fit the data well, or the data is not linear, we coul
 
 ---
 
-### Linear Regression Exercise
+## Linear Regression Exercise
 
 we have 2 exercises here, first one is the **Liear Regression with one variable**, another is **with multi variables**, but first, let me defien the function to calculate the gradient descent and cost function, which are shared in both exercises
 
@@ -96,7 +97,7 @@ function [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters
 end
 ```
 
-#### one variable - profits for a food truck
+### one variable - profits for a food truck
 
 we predict the profit using the population of the city
 
@@ -211,3 +212,128 @@ plot(theta(1), theta(2), 'rx', 'MarkerSize', 10, 'LineWidth', 2);
 ![svg](images/output_9_1.svg)
 
 ![svg](images/output_9_2.svg)
+
+### multi variable - predict house price
+
+```octave
+%% ================ Part 1: Feature Normalization ================
+
+%% Clear and Close Figures
+clear ; close all; clc
+
+%% Load Data
+data = load('ex1data2.txt');
+X = data(:, 1:2);
+y = data(:, 3);
+m = length(y);
+
+% Print out some data points
+fprintf('First 10 examples from the dataset: \n');
+fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');
+
+% Scale features and set them to zero mean
+fprintf('Normalizing Features ...\n');
+
+[X mu sigma] = featureNormalize(X);
+
+% Add intercept term to X
+X = [ones(m, 1) X];
+```
+
+    First 10 examples from the dataset:
+     x = [2104 3], y = 399900
+     x = [1600 3], y = 329900
+     x = [2400 3], y = 369000
+     x = [1416 2], y = 232000
+     x = [3000 4], y = 539900
+     x = [1985 4], y = 299900
+     x = [1534 3], y = 314900
+     x = [1427 3], y = 198999
+     x = [1380 3], y = 212000
+     x = [1494 3], y = 242500
+    Normalizing Features ...
+    size =  2
+
+```octave
+%% ================ Part 2: Gradient Descent ================
+% Choose some alpha value
+alpha = 0.02;
+num_iters = 500;
+
+% Init Theta and Run Gradient Descent
+theta = zeros(3, 1);
+[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+% Plot the convergence graph
+figure;
+plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+xlabel('Number of iterations');
+ylabel('Cost J');
+
+% Display gradient descent's result
+fprintf('Theta computed from gradient descent: \n');
+fprintf(' %f \n', theta);
+fprintf('\n');
+
+% Estimate the price of a 1650 sq-ft, 3 br house
+data = [1650 3];
+normalizedData = (data - mu) ./ sigma;
+normalizedData = [1 normalizedData];
+price = normalizedData * theta;
+
+% ============================================================
+
+fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+         '(using gradient descent):\n $%f\n'], price);
+```
+
+    Theta computed from gradient descent:
+     340398.694491
+     109855.300268
+     -5873.743442
+
+    Predicted price of a 1650 sq-ft, 3 br house (using gradient descent):
+     $293236.305203
+
+![svg](images/output_12_1.svg)
+
+```octave
+%% ================ Part 3: Normal Equations ================
+%% Load Data
+data = csvread('ex1data2.txt');
+X = data(:, 1:2);
+y = data(:, 3);
+m = length(y);
+
+% Add intercept term to X
+X = [ones(m, 1) X];
+
+% Calculate the parameters from the normal equation
+theta = normalEqn(X, y);
+
+% Display normal equation's result
+fprintf('Theta computed from the normal equations: \n');
+fprintf(' %f \n', theta);
+fprintf('\n');
+
+
+% Estimate the price of a 1650 sq-ft, 3 br house
+% ====================== YOUR CODE HERE ======================
+price = [1 1650 3] * theta; % You should change this
+
+
+% ============================================================
+
+fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+         '(using normal equations):\n $%f\n'], price);
+```
+
+    Theta computed from the normal equations:
+     89597.909544
+     139.210674
+     -8738.019113
+
+    Predicted price of a 1650 sq-ft, 3 br house (using normal equations):
+     $293081.464335
+
+**Compare the result** get from the Gradient Descent result **293236.305203** and Normal Equation result **293081.464335**, they are pretty close, and if you adding the iteration, the gradient descent result will get more close to the normal equation result: try increase the `num_iters` to 1000, you will get result **293083.696778**
