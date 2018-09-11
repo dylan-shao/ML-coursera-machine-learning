@@ -8,7 +8,7 @@ Supervised learning problems are categorized into `regression` and `classificati
 
 So we are preicting results in a continuous oupt, the hypothesis funciton for a linear problem could be written like:
 
-![Screen%20Shot%202018-09-10%20at%209.48.58%20PM.png](attachment:Screen%20Shot%202018-09-10%20at%209.48.58%20PM.png)
+![hypothesis equation](images/hypothesis.png)
 ￼￼
 Our goal here is to **get the theta** so we could use the hypothesis function to predict new data.
 How we gonna get theta? We use trainning data, for example for **m trainning examples**, **n features**, we have a m*n matrix that every row is a single training input, and there are two ways to solve this m*n hypothesis equation problem to get theta:
@@ -21,17 +21,17 @@ And we use numerical way when features are large, **n > 10,000**. Because of the
 
 #### Analystical way - Normal Equation:
 
-![Screen%20Shot%202018-09-10%20at%2010.04.26%20PM.png](attachment:Screen%20Shot%202018-09-10%20at%2010.04.26%20PM.png)
+![normal equation](images/normalequ.png)
 
 Note, when m < n, the X^T\*X does not inverseable (when m == n, maybe not inversible), so here we need to calculate the [Moore–Penrose inverse](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse) - the **pinv** function in matlab/octave or numpy.
 
 #### Numerical way - Gradient Descent
 
 We can measure the accuracy of our hpothesis function by using the **cost function** or **loss function**:
-![Screen%20Shot%202018-09-10%20at%2010.15.49%20PM.png](attachment:Screen%20Shot%202018-09-10%20at%2010.15.49%20PM.png)
+![cost equation](images/costfn.png)
 
 which is a function of theta, and our goal is to get the global minimum of the function -using gradient descent. We take the derivative of each theta and let them equal to 0, we can get the following equation
-![Screen%20Shot%202018-09-10%20at%2010.09.33%20PM.png](attachment:Screen%20Shot%202018-09-10%20at%2010.09.33%20PM.png)and it turns out, that if we choose a sufficiently small **learning rate - alpha**, the cost function could recrease on every iteration, but if alpha is too small, gradient descent can be very slow to converge. So, **how can we speed up the gradient descent?** -- **Feature Scaling**
+![gradient descent function](images/gd.png)and it turns out, that if we choose a sufficiently small **learning rate - alpha**, the cost function could recrease on every iteration, but if alpha is too small, gradient descent can be very slow to converge. So, **how can we speed up the gradient descent?** -- **Feature Scaling**
 
 ##### Feature Scaling
 
@@ -39,7 +39,7 @@ the theta will decrease slowly on large ranges, and quickly on small ranges. For
 
 1. feature scaling: dividing the input values by the range or standard deviation of the input variable, resulting new range of just 1
 2. mean normalization: substracting the average value for an input variable from the values for that input variable, resulting in a new average value of 0.
-   ![Screen%20Shot%202018-09-10%20at%2010.30.20%20PM.png](attachment:Screen%20Shot%202018-09-10%20at%2010.30.20%20PM.png)
+   ![feature scaling equation](images/dc.png)
 
 ### Features and Polynomial Regression
 
@@ -159,7 +159,7 @@ plot(X(:,2), X*theta, '-')
 legend('Training data', 'Linear regression')
 ```
 
-![svg](output_7_0.svg)
+![svg](images/output_7_0.svg)
 
 ```octave
 predict1 = [1, 3.5] *theta;
@@ -208,6 +208,6 @@ plot(theta(1), theta(2), 'rx', 'MarkerSize', 10, 'LineWidth', 2);
 
     Visualizing J(theta_0, theta_1) ...
 
-![svg](output_9_1.svg)
+![svg](images/output_9_1.svg)
 
-![svg](output_9_2.svg)
+![svg](images/output_9_2.svg)
