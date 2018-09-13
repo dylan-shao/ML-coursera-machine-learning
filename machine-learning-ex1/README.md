@@ -44,7 +44,7 @@ the theta will decrease slowly on large ranges, and quickly on small ranges. For
 
 ### Features and Polynomial Regression
 
-if our prediction does not fit the data well, or the data is not linear, we could add more features to make the hypothsis function quadratic, cubic or square root, so our hypothsis could fit our data. Note that feature scaling is very important in this case, because for range 1 -1000 could become 1 - 1000000 if you adding the cubic feature.
+if our prediction does not fit the data well, or the data is not linear, we could add more features to make the hypothsis function quadratic, cubic or square root, so our hypothsis could fit our data. Note that feature scaling is very important in this case, because for range 1 -1000 could become 1 - 1000000000 if you adding the cubic feature.
 
 ---
 
