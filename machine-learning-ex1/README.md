@@ -336,4 +336,6 @@ fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
     Predicted price of a 1650 sq-ft, 3 br house (using normal equations):
      $293081.464335
 
-**Compare the result** get from the Gradient Descent result **293236.305203** and Normal Equation result **293081.464335**, they are pretty close, and if you adding the iteration, the gradient descent result will get more close to the normal equation result: try increase the `num_iters` to 1000, you will get result **293083.696778**
+**Compare the result** get from the Gradient Descent result **293236.305203** and Normal Equation result **293081.464335**, they are pretty close, and if you increase the iteration, the gradient descent result will get more close to the normal equation result: 
+
+try increase the `num_iters` to 1000, you will get result **293083.696778**
