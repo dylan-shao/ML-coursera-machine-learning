@@ -13,8 +13,8 @@ So we are preicting results in a continuous oupt, the hypothesis funciton for a 
 Our goal here is to **get the theta** so we could use the hypothesis function to predict new data.
 How we gonna get theta? We use trainning data, for example for **m trainning examples**, **n features**, we have a m*n matrix that every row is a single training input, and there are two ways to solve this m*n hypothesis equation problem to get theta:
 
-1. **Analystical way**: using the matrix calculation like **Normal Equation**, Complexity **O(kn^2)**
-2. **Numerical way**: solve the cost function by using **Gradient Descent**, Complexity **O(n^3)**
+1. **Analystical way**: using the matrix calculation like **Normal Equation**, Complexity **O(n^3)**
+2. **Numerical way**: solve the cost function by using **Gradient Descent**, Complexity **O(kn^2)**
 
 Usually we use analystic way if features of the problem are relative small, like **n < 10,000**, where n is the **number of features**.
 And we use numerical way when features are large, **n > 10,000**. Because of the complexity difference.
