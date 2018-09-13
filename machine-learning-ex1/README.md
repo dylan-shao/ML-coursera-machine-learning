@@ -32,7 +32,7 @@ We can measure the accuracy of our hpothesis function by using the **cost functi
 
 which is a function of theta, and our goal is to get the global minimum of the function -using gradient descent. We take the derivative of each theta and let them equal to 0, we can get the following equation
 ![gradient descent function](images/gd.png)
-and it turns out, that if we choose a sufficiently small **learning rate - alpha**, the cost function could recrease on every iteration, but if alpha is too small, gradient descent can be very slow to converge. So, **how can we speed up the gradient descent?** -- **Feature Scaling**
+and it turns out, that if we choose a sufficiently small **learning rate - alpha**, the cost function could decrease on every iteration, but if alpha is too small, gradient descent can be very slow to converge. So, **how can we speed up the gradient descent?** -- **Feature Scaling**
 
 ##### Feature Scaling
 
